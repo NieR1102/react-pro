@@ -16,30 +16,83 @@
     width: 150px;
     background: #001529;
     overflow: auto;
-    &>div {
-      text-align: center;
-      line-height: 40px;
-      cursor: pointer;
-      border-bottom: 1px solid #aaa;
-      &>a {
-        text-decoration: none;
+    .ant-menu-submenu-title{
+      padding-left: 18px!important;
+    }
+    &>ul{
+      &>img{
         display: block;
-        width: 100%;
-        height: 100%;
-        color: white;
-      }
-      &>a.on {
-        background: orange;
+        width: 100px;
+        height: 100px;
+        margin-left: 25px;
       }
     }
   }
-  .qf-header {
-    position: absolute;
-    top: 0;
+  .ant-layout-header{
+    padding: 0;
     height: 60px;
-    left: 150px;
-    right: 0;
-    padding: 15px;
+    width: 100%;
+    z-index: 19;
+  }
+  .qf-header {
+    height: 60px;
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,21,41,.08);
+    .ant-row{
+      height: 60px;
+      &>div{
+        height: 60px;
+        overflow: hidden;
+        .anticon-search{
+          padding: 20px 15px;
+          cursor: pointer;
+        }
+        .anticon-search:hover{
+          background-color: rgba(245, 245, 245, 0.637);
+        }
+
+        .anticon-bell{
+          padding: 20px 15px;
+          cursor: pointer;
+        }
+        .anticon-bell:hover{
+          background-color: rgba(245, 245, 245, 0.637);
+        }
+        .user-info{
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          width: 110px;
+          height: 60px;
+          padding: 14px 10px;
+          line-height: 60px;
+          cursor: pointer;
+          &>i{
+            font-style: normal;
+            font-size: 14px;
+            line-height: 14px;
+            padding-left: 10px;
+          }
+        }
+        .user-info:hover{
+          background-color: rgba(245, 245, 245, 0.637);
+        }
+        .msg-badge{
+          display: inline-block;
+        }
+        .anticon-global{
+          position: absolute;
+          left: 210px;
+          top: 0;
+          padding: 20px 15px;
+        }
+        .anticon-global:hover{
+          background-color: rgba(245, 245, 245, 0.637);
+        }
+        
+      }
+    }
   }
   .qf-main {
     position: absolute;
@@ -47,21 +100,24 @@
     bottom: 0;
     left: 150px;
     right: 0;
-    background-color: #eee;
-    padding: 15px;
-    &>div {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      right: 15px;
-      bottom: 15px;
-      overflow: auto;
-      background: white;
-      padding: 15px;
-      border-radius: 5px;
-      padding-bottom: 100px;
-      // height: 100%;
-      min-width: 750px;
-    }
+    background-color: #f0f2f5;
+    overflow: auto;
+     
   }
+  // /* 设置滚动条的样式 */
+  .qf-main::-webkit-scrollbar {
+    width:0;
+    background-color: transparent;
+  }
+
+  //   /* 滚动槽 */
+  // .qf-main::-webkit-scrollbar-track {
+  //   border-radius:10px;
+  // }
+
+  //   /* 滚动条滑块 */
+  // .qf-main::-webkit-scrollbar-thumb {
+  //   border-radius:10px;
+  //   background:black;
+  // }
 }

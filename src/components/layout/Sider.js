@@ -1,5 +1,7 @@
 import React from 'react'
 
+import logo from '@/assets/img/iphone.svg'
+
 import routes from '@/views'
 import { NavLink } from 'react-router-dom'
 
@@ -34,11 +36,11 @@ export default props=>{
 
   return (
     <div className='qf-sider'>
-
     <Menu
       mode="inline"
       theme="dark"
     >
+      <img src={logo} alt=""/>
       { createNavLink()}
     </Menu>
     </div>

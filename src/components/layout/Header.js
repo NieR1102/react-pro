@@ -5,6 +5,21 @@ import {
   // withRouter
 } from 'react-router-dom'
 
+import { 
+  Row,
+  Col,
+  Avatar,
+  Image,
+  Badge
+} from 'antd'
+
+import {
+  SearchOutlined,
+  BellOutlined,
+  UserOutlined,
+  GlobalOutlined
+} from '@ant-design/icons'
+
 // 问题：没有被Route组件直接包裹的React组件中，是没有路由API的。
 // 那该怎么办？
 // 在类组件中，只能使用 withRouter 来解决问题。
@@ -24,7 +39,24 @@ export default props => {
   console.log('---header history', history)
   return (
     <div className='qf-header'>
-      header
+      <Row>
+        <Col span={5} offset={19}>
+          <SearchOutlined style={{ fontSize: '20' }}/>
+          <span className='msg-badge'>
+            <BellOutlined style={{ fontSize: '20' }}/>
+            <Badge count={99} offset={[-14, -22]}>
+              <a href="#" className="head-example" />
+            </Badge>
+          </span>
+          <span className='user-info'>
+            <Avatar
+              src={<Image src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" />}
+            />
+            <i>三有鹿</i>
+          </span>
+          <GlobalOutlined style={{ fontSize: '20' }}/>
+        </Col>
+      </Row>
     </div>
   )
 }
