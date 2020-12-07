@@ -7,7 +7,6 @@ import  'echarts/lib/chart/pie'
 
 import Demo from './home/Demo'
 
-import '@/assets/css/home.scss'
 import { 
   PageHeader,
   Avatar,
@@ -27,22 +26,9 @@ import {
 } from '@ant-design/icons'
 
 
-const { Meta } = Card
+import { Formnav } from '@/components'
 
-const routes = [
-  {
-    path: 'index',
-    breadcrumbName: '首页',
-  },
-  {
-    path: 'first',
-    breadcrumbName: 'Second-level Menu',
-  },
-  {
-    path: 'second',
-    breadcrumbName: '工作台',
-  },
-]
+const { Meta } = Card
 
 
 const gridStyle = {
@@ -51,7 +37,7 @@ const gridStyle = {
 };
 
 export default prosp=> {
-  
+  let [name,setName] = useState('home')
   useEffect(() => {
     
     var myChart = echarts.init(document.getElementById('main'))
@@ -82,42 +68,42 @@ export default prosp=> {
           }
       },
       series: [
-          {
-              name: '访问来源',
-              type: 'pie',
-              radius: '55%',
-              center: ['50%', '50%'],
-              data: [
-                  {value: 335, name: '直接访问'},
-                  {value: 310, name: '邮件营销'},
-                  {value: 274, name: '联盟广告'},
-                  {value: 235, name: '视频广告'},
-                  {value: 400, name: '搜索引擎'}
-              ].sort(function (a, b) { return a.value - b.value; }),
-              roseType: 'radius',
-              label: {
+        {
+          name: '访问来源',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '50%'],
+          data: [
+              {value: 335, name: '直接访问'},
+              {value: 310, name: '邮件营销'},
+              {value: 274, name: '联盟广告'},
+              {value: 235, name: '视频广告'},
+              {value: 400, name: '搜索引擎'}
+          ].sort(function (a, b) { return a.value - b.value; }),
+          roseType: 'radius',
+          label: {
+              color: 'rgba(0, 0, 0, 0.3)'
+          },
+          labelLine: {
+              lineStyle: {
                   color: 'rgba(0, 0, 0, 0.3)'
               },
-              labelLine: {
-                  lineStyle: {
-                      color: 'rgba(0, 0, 0, 0.3)'
-                  },
-                  smooth: 0.2,
-                  length: 10,
-                  length2: 20
-              },
-              itemStyle: {
-                  color: 'rgb(108, 172, 255)',
-                  shadowBlur: 160,
-                  shadowColor: 'rgba(0, 0, 0, 0)'
-              },
-  
-              animationType: 'scale',
-              animationEasing: 'elasticOut',
-              animationDelay: function (idx) {
-                  return Math.random() * 200;
-              }
+              smooth: 0.2,
+              length: 10,
+              length2: 20
+          },
+          itemStyle: {
+              color: 'rgb(108, 172, 255)',
+              shadowBlur: 160,
+              shadowColor: 'rgba(0, 0, 0, 0)'
+          },
+
+          animationType: 'scale',
+          animationEasing: 'elasticOut',
+          animationDelay: function (idx) {
+              return Math.random() * 200;
           }
+        }
       ]
     }
     myChart.setOption(option)
@@ -127,11 +113,8 @@ export default prosp=> {
   return (
     <div className='lhp-home'>
       <div className='home-work'>
-        <PageHeader
-          className="site-page-header"
-          title="工作台"
-          breadcrumb={{ routes }}
-        >
+        <div className='lhp-nav' style={{height:200}}>
+          <Formnav name={name}/>
           <Row>
             <Col span={2}>
                 <Avatar
@@ -161,7 +144,7 @@ export default prosp=> {
               <span>111</span>
             </Col>
           </Row>
-        </PageHeader>
+        </div>
       </div>
       <Row justify="space-around">
         <Col span={16}>

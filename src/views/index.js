@@ -5,9 +5,9 @@ import {
 } from '@ant-design/icons'
 
 const ReduxStudy = loadable(()=>import('./home/ReduxStudy'))
-const ReduxHome = loadable(()=>import('./lhppro/ReduxHome'))
-const ReduxUser = loadable(()=>import('./lhppro/ReduxUser'))
-const ReduxFrom = loadable(()=>import('./lhppro/ReduxFrom'))
+const Home = loadable(()=>import('./lhphome/Home'))
+const GoodList = loadable(()=>import('./lhpgood/GoodList'))
+const GoodAddorEdit = loadable(()=>import('./lhpgood/GoodAddorEdit'))
 
 
 export default [ // eslint-disable-line
@@ -33,19 +33,21 @@ export default [ // eslint-disable-line
         id: 1201,
         text: '首页',
         path: '/home',
-        component: ReduxHome
+        component: Home
       },
       {
-        id: 1203,
-        text: '表单',
-        path: '/from',
-        component: ReduxFrom
-      },
-      {
-        id: 1202,
-        text: '个人中心',
-        path: '/user',
-        component: ReduxUser
+        id:1202,
+        text:'商品列表',
+        path:'/good',
+        component: GoodList,
+        children: [
+          {
+            id:120201,
+            text:'商品新增',
+            path:'/good/addoredit',
+            component: GoodAddorEdit
+          },
+        ]
       }
     ]
   }
