@@ -8,16 +8,14 @@ import {
   AutoComplete,
   InputNumber,
   Upload, 
-  message,
   Switch
 } from 'antd'
 
 import { 
-  QuestionCircleOutlined,
   GithubOutlined
 } from '@ant-design/icons'
 
-import { Formnav,UpLoad } from '@/components'
+import { Formnav,UpLoadIcon } from '@/components'
 import './style.scss'
 import img from '@/utils/img'
 import { fetchAddorEdit } from '@/utils/api'
@@ -53,9 +51,9 @@ export default props=> {
     const [form] = Form.useForm()
 
     // 图片上传
-    const imgSuccess = e=>{
-      console.log('图片上传', e)
-      if(e && e.fileList && e.fileList[0] && e.fileList[0].response){
+    const imgSuccess = e => {
+      console.log('图片上传成功', e)
+      if(e && e.fileList && e.fileList[0] && e.fileList[0].response) {
         setImageUrl(e.fileList[0].response.data.url)
       }
     }
@@ -63,6 +61,7 @@ export default props=> {
     // 表单提交
     const onFinish = values => {
       console.log('Received values of form: ', values)
+      values.img = imageUrl
       fetchAddorEdit(values).then(()=>{
         props.history.replace('/good')
       })
@@ -140,9 +139,9 @@ export default props=> {
           </Form.Item>
 
           <Form.Item
-            label="商品图片"
+            label='商品图片'
             rules={[
-              {required: true,message: '商品图片是必填!'},
+              { required: true, message: '商品图片是必填!' }
             ]}
           >
             <Upload
@@ -151,9 +150,13 @@ export default props=> {
               listType="picture-card"
               className="avatar-uploader"
               showUploadList={false}
-              onChange={ imgSuccess }
+              onChange={imgSuccess}
             >
-              {imageUrl ? <img src={img.imgbaseUrl+imageUrl} alt="avatar" style={{ width: '100%' }} /> : <UpLoad/>}
+              {
+                imageUrl ?
+                <img src={img.imgbaseUrl+imageUrl} alt="avatar" style={{ width: '100%' }} />
+                : <UpLoadIcon />
+              }
             </Upload>
           </Form.Item>
 

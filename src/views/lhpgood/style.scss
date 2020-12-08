@@ -40,18 +40,56 @@
     position: absolute;
     top: 120px;
     width: 100%;
-    // height: 100%;
-    // background: #fff;
-    .ant-form{
+    .ant-row{
       position: absolute;
       // padding: 20px;
-      height: 100px;
+      height: 80px;
       top: 0;
       left: 20px;
       right: 20px;
       bottom: 20px;
       background: #fff;
       border-radius: 3px;
+      .turn-right{
+        display: block;
+        text-align: right;
+      }
+    }
+  }
+  .lhp-good-list{
+    position: absolute;
+    top: 220px;
+    width: 100%;
+    height: 100%;
+    .ant-table-wrapper{
+      position: absolute;
+      padding: 60px 20px 20px 20px;
+      top: 0;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      background: #fff;
+      border-radius: 3px;
+    }
+    .del-btn{
+      position: absolute;
+      left: 40px;
+      top: 20px;
+      z-index: 9999;
+    }
+    .good-img{
+      img{
+        display: block;
+        width: 60px;
+        height: 60px;
+        margin: 0 auto;
+      }
+    }
+    .good-desc{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      
     }
   }
 }

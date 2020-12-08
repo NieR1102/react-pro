@@ -28,7 +28,7 @@ const Lhpnav = props=>{
           <div>
               <Breadcrumb>
                 <Breadcrumb.Item>
-                  <a href="/">首页</a>
+                  <a href="#/">首页</a>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>商品列表</Breadcrumb.Item>
               </Breadcrumb>
@@ -43,10 +43,10 @@ const Lhpnav = props=>{
           <div>
               <Breadcrumb>
                 <Breadcrumb.Item>
-                  <a href="">首页</a>
+                  <a href="#/">首页</a>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                  <a href="">商品列表</a>
+                  <a href="#/good">商品列表</a>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>商品新增</Breadcrumb.Item>
               </Breadcrumb>

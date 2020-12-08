@@ -44,7 +44,7 @@ export default [ // eslint-disable-line
           {
             id:120201,
             text:'商品新增',
-            path:'/good/addoredit',
+            path:'/good/addoredit/:id',
             component: GoodAddorEdit
           },
         ]

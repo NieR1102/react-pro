@@ -17,7 +17,27 @@ export function fetchAddorEdit(data) {
   })
 }
 
+// 获取商品列表
+export function fetchGoodList(params) {
+  return axios({
+    url: '/api/v1/good/list',
+    method: 'GET',
+    params
+  })
+}
+
+// 获取商品列表
+export function fetchCateList(params) {
+  return axios({
+    url: '/api/v1/good/cates',
+    method: 'GET',
+    params
+  })
+}
+
 export default {
   fetchQqMusic,
-  fetchAddorEdit
+  fetchAddorEdit,
+  fetchGoodList,
+  fetchCateList
 }
