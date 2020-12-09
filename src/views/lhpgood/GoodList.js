@@ -24,10 +24,12 @@ import {
   Space,
   Button,
   Table,
-  Tag,
+  Modal
 } from 'antd'
 const { Option } = Select
-import { AudioOutlined } from '@ant-design/icons'
+const { confirm } = Modal
+
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 
 
 const { RangePicker } = DatePicker
@@ -67,6 +69,48 @@ export default props=> {
 
   const onSelectChange = keys => {
     setKeys(keys)
+  }
+
+  // 删除操作
+  const handleDel = row => {
+    const ele = <span style={{color: 'red'}}>{row.name}</span>
+    confirm({
+      title: '提示',
+      icon: <ExclamationCircleOutlined />,
+      content: <div>你确定要删除 {ele} 吗？</div>,
+      okText: '确定',
+      cancelText: '取消',
+      onOk() {
+        api.fetchGoodDel({id:row._id}).then(()=>{
+          setFilter(JSON.parse(JSON.stringify(filter)))
+        })
+      }
+    })
+  }
+
+  //批量删除
+  const mulDelete = row => {
+    let id =''
+    keys.map(ele=>id+=(';'+ele))
+    // 向后端传递由 id 组成的字符串，不能传数组
+    confirm({
+      title: '提示',
+      icon: <ExclamationCircleOutlined />,
+      content: <div>你确定要删除 {id} 吗？</div>,
+      okText: '确定',
+      cancelText: '取消',
+      onOk() {
+        api.fetchGoodDel({id}).then(()=>{
+          setFilter(JSON.parse(JSON.stringify(filter)))
+        })
+      }
+    })
+    
+  }
+
+  // 编辑
+  const skipToEdit = row =>{
+    props.history.push('/good/addoredit/'+(row?row._id : 0))
   }
 
   const rowSelection = {
@@ -143,12 +187,13 @@ export default props=> {
     },
     {
       title: '操作',
-      key: 'action',
+      key: 'tags',
+      dataIndex: 'tags',
       align: 'center',
-      render: (text, record) => (
+      render: (text, row) => (
         <Space size="middle">
-          <a>删除</a>
-          <a>编辑</a>
+          <a onClick={()=>handleDel(row)}>删除</a>
+          <a onClick={()=>skipToEdit(row)}>编辑</a>
         </Space>
       ),
     },
@@ -157,7 +202,7 @@ export default props=> {
   return (
     <div className='lhp-list'>
       <div className='lhp-nav'>
-        <Formnav name={name}/>
+        <Formnav name={name} />
       </div>
       <div className='list-inquire'>
           <Row align='middle' >
@@ -206,7 +251,7 @@ export default props=> {
       </div>
       <div className='lhp-good-list'>
         <div className='del-btn'>
-          <Button type="primary" >
+          <Button size='small' onClick={()=>mulDelete()} type='danger'>
             批量删除
           </Button>
         </div>

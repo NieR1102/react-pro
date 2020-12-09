@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState,useEffect } from 'react'
 
 import {
   Form,
@@ -18,7 +18,11 @@ import {
 import { Formnav,UpLoadIcon } from '@/components'
 import './style.scss'
 import img from '@/utils/img'
+import action from '@/store/actions'
+import { useDispatch,useSelector } from 'react-redux'
 import { fetchAddorEdit } from '@/utils/api'
+import CateSelect from './components/CateSelect'
+
 
 const { Option } = Select
 
@@ -43,13 +47,23 @@ const tailFormItemLayout = {
 }
 
 export default props=> {
+
     const [autoCompleteResult, setAutoCompleteResult] = useState([])
+    const dispatch = useDispatch()
+    const goodInfo = useSelector(store=>store.good.goodInfo)
 
     let [imageUrl, setImageUrl] = useState('')
-    let [name,setName] = useState('add')
+    let [values, setValues] = useState('')
+    const [flag, setFlag] = useState(false) // 是否已经填充表单
 
+    const id = props.match.params.id
+    const isAdd = id=== '0'
     const [form] = Form.useForm()
-
+    
+    // 当Form表单值发生变化时，我们手动取值，赋值给声明式变量 values
+    const formChange = values => {
+      setValues(values)
+    }
     // 图片上传
     const imgSuccess = e => {
       console.log('图片上传成功', e)
@@ -58,10 +72,27 @@ export default props=> {
       }
     }
 
+    // 渲染编辑表单
+    useEffect(()=>{
+      if(!flag)form.setFieldsValue(goodInfo)
+
+      if(goodInfo._id) setFlag(true)
+      return undefined
+    })
+
+    // 请求商品详情的数据
+    useEffect(()=>{
+      if(!isAdd)dispatch(action.goodDetailAction({id}))
+      return ()=>{
+        // 当组件销毁时，清空redux state
+        dispatch(action.clearAction())
+      }
+    },[])
+
     // 表单提交
     const onFinish = values => {
-      console.log('Received values of form: ', values)
-      values.img = imageUrl
+      values.img = (imageUrl||goodInfo.img) 
+      if(!isAdd) values.id = goodInfo._id
       fetchAddorEdit(values).then(()=>{
         props.history.replace('/good')
       })
@@ -71,7 +102,7 @@ export default props=> {
   return (
     <div className='lhp-good'>
       <div className='lhp-nav'>
-        <Formnav name={name}/>
+        <Formnav name={id}/>
       </div>
       <div className='lhp-form'>
         <Form
@@ -79,11 +110,8 @@ export default props=> {
           form={form}
           name="register"
           onFinish={onFinish}
-          initialValues={{
-            residence: ['zhejiang', 'hangzhou', 'xihu'],
-            prefix: '86',
-          }}
           scrollToFirstError
+          onValuesChange={(val, values)=>formChange(values)}
         >
           <Form.Item
             name="name"
@@ -103,7 +131,7 @@ export default props=> {
             rules={[
               {required: true,message: '商品描述是必填!'},
               {max:50, message:'描述长度不能多于20个字'},
-              {min:10, message:'描述长度不能少于2个字'}
+              {min:5, message:'描述长度不能少于2个字'}
             ]}
           >
             <TextArea rows={4} />
@@ -126,16 +154,9 @@ export default props=> {
               {required: true,message: '商品价格是必填!'},
             ]}
           >
-            <Select
-              style={{ width: 200 }}
-              placeholder="选择商品类型"
-            >
-              <Option key='1' value="电脑">电脑</Option>
-              <Option key='2' value="手机">手机</Option>
-              <Option key='3' value="汽车">汽车</Option>
-              <Option key='4' value="生活">生活</Option>
-              <Option key='5' value="电器">电器</Option>
-            </Select>
+            <CateSelect
+
+            />
           </Form.Item>
 
           <Form.Item
@@ -153,8 +174,8 @@ export default props=> {
               onChange={imgSuccess}
             >
               {
-                imageUrl ?
-                <img src={img.imgbaseUrl+imageUrl} alt="avatar" style={{ width: '100%' }} />
+                (imageUrl||goodInfo.img) ?
+                <img src={img.imgbaseUrl+(imageUrl||goodInfo.img)} alt="avatar" style={{ width: '100%' }} />
                 : <UpLoadIcon />
               }
             </Upload>
@@ -170,7 +191,9 @@ export default props=> {
           
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">
-              提交
+              {
+                id==0? '提交' : '提交修改' 
+              }
             </Button>
           </Form.Item>
         </Form>

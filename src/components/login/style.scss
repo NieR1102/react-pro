@@ -1,0 +1,51 @@
+.lhp-login{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #f0f2f5;
+  background-image: url(../../assets/img/backimg.svg) ;
+  background-repeat: no-repeat;
+  background-position: center 110px;
+  background-size: 100%;
+  .login-inner{
+    position: absolute;
+    top: 50%;
+    left: 49%;
+    width: 500px;
+    margin-left: -250px;
+    padding: 25px;
+    height: 250px;
+    margin-top: -125px;
+    border-radius: 5px;
+  }
+  .login-logo{
+    position: absolute;
+    top: 50px;
+    left: 47%;
+    &>img{
+      display: inline-block;
+      width: 100px;
+      // box-shadow: 0 2px 2px #000;
+    }
+  }
+  footer{
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    &>p{
+      line-height: 14px;
+      &>a{
+        color:  rgb(155, 155, 155);;
+        padding: 10px;
+      }
+      &>a:hover{
+        color:#000;
+        padding: 10px;
+      }
+    }
+  }
+}

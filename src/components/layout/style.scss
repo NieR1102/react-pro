@@ -74,9 +74,27 @@
             line-height: 14px;
             padding-left: 10px;
           }
+          .outlogin{
+            &>a{
+              position: fixed;
+              top: 60px;
+              right: 79px;
+              width: 110px;
+              text-align: center;
+              background-color: rgba(245, 245, 245, 0.637);
+              color: #ccc;
+              display: none;
+            }
+          }
         }
         .user-info:hover{
           background-color: rgba(245, 245, 245, 0.637);
+        }
+        .user-info:hover .outlogin>a{
+          display: block!important;
+        }
+        .user-info .outlogin>a:hover{
+          color: #0084ff;
         }
         .msg-badge{
           display: inline-block;

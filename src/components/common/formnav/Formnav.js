@@ -38,7 +38,7 @@ const Lhpnav = props=>{
           </div>
         )
       break
-      case 'add':
+      case '0':
         return (
           <div>
               <Breadcrumb>
@@ -59,10 +59,19 @@ const Lhpnav = props=>{
       default:
         return(
           <div>
-              <Breadcrumb>
-                <Breadcrumb.Item>首页</Breadcrumb.Item>
-              </Breadcrumb>
-          </div>
+            <Breadcrumb>
+              <Breadcrumb.Item>
+                <a href="#/">首页</a>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <a href="#/good">商品列表</a>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>商品编辑</Breadcrumb.Item>
+            </Breadcrumb>
+            <div className='breadcrumb-name'>
+              <h1>商品编辑</h1>
+            </div>
+        </div>
         )
     }
   }
@@ -74,7 +83,7 @@ const Lhpnav = props=>{
 }
 
 export default props=> {
-  console.log('formnav', props.name)  
+  // console.log('formnav', props.name)  
   return (
     <div className='lhp-breadcrumb'>
       <Lhpnav name={props.name}/>

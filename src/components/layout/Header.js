@@ -35,8 +35,11 @@ import {
 
 export default props => {
   const history = useHistory()
-  console.log('---header props', props)
-  console.log('---header history', history)
+
+  const logout = ()=> {
+    localStorage.removeItem('token')
+    location.reload()
+  }
   return (
     <div className='qf-header'>
       <Row>
@@ -53,7 +56,9 @@ export default props => {
               src={<Image src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" />}
             />
             <i>三有鹿</i>
+            <span className='outlogin'><a onClick={()=>logout()}>退出登录</a> </span>
           </span>
+          
           <GlobalOutlined style={{ fontSize: '20' }}/>
         </Col>
       </Row>

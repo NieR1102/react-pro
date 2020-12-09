@@ -15,7 +15,8 @@ export default props => {
     <div className='qf-cate-select'>
       <Select
         style={{ width: 200 }}
-        placeholder="选择一个品类"
+        placeholder="选择商品类型"
+        value={props.value || ''}
         onChange={val=>props.onChange && props.onChange(val)}
         allowClear={props.allowClear}
       >
