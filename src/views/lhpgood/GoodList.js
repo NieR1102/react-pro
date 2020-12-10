@@ -63,6 +63,7 @@ export default props=> {
 
   const filterChange = (key, val) => {
     filter[key] = val
+    console.log('filterChange',key)
     if(key!=='page') filter.page = 1
     setFilter(JSON.parse(JSON.stringify(filter)))
   }
@@ -226,6 +227,7 @@ export default props=> {
                 hasAll
                 onChange={cate=>filterChange('cate', cate)}
                 allowClear
+                value={filter.cate}
               />
             </Col>
             <Col span={2}>
